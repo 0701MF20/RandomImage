@@ -254,9 +254,6 @@
 
 
 
-
-
-
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
@@ -285,24 +282,26 @@ function Home() {
         reader.onload = () => {
           const imageUrl = reader.result;
           setImage(imageUrl);
-
-          // Dynamically update meta tags
-          const ogImageMeta = document.querySelector('meta[property="og:image"]');
-          const twitterImageMeta = document.querySelector('meta[name="twitter:image"]');
-          
-          if (ogImageMeta) {
-            ogImageMeta.setAttribute('content', imageUrl);
-          }
-          
-          if (twitterImageMeta) {
-            twitterImageMeta.setAttribute('content', imageUrl);
-          }
+          updateMetaTags(imageUrl);
         };
         reader.readAsDataURL(blob);
       })
       .catch(error => {
         console.error('Error:', error);
       });
+  }
+
+  const updateMetaTags = (imageUrl) => {
+    const ogImageMeta = document.querySelector('meta[property="og:image"]');
+    const twitterImageMeta = document.querySelector('meta[name="twitter:image"]');
+
+    if (ogImageMeta) {
+      ogImageMeta.setAttribute('content', imageUrl);
+    }
+
+    if (twitterImageMeta) {
+      twitterImageMeta.setAttribute('content', imageUrl);
+    }
   }
 
   const handleSubmit = (e) => {
