@@ -24,7 +24,12 @@ function Home() {
       return response.blob();
     })
     .then(result => {
-      setImage(URL.createObjectURL(result));
+      const imageUrl = URL.createObjectURL(result);
+      setImage(imageUrl);
+
+      // Dynamically update meta tags
+      document.querySelector('meta[property="og:image"]').setAttribute('content', imageUrl);
+      document.querySelector('meta[name="twitter:image"]').setAttribute('content', imageUrl);
     })
     .catch(error => {
       console.error('Error:', error);
