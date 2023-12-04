@@ -130,7 +130,7 @@ function Home() {
         reader.onload = () => {
           const imageUrl = reader.result;
           setImage(imageUrl);
-
+console.log(imageUrl)
           // Dynamically update meta tags
           document.querySelector('meta[property="og:image"]').setAttribute('content', imageUrl);
           document.querySelector('meta[name="twitter:image"]').setAttribute('content', imageUrl);
