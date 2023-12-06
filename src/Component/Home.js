@@ -254,11 +254,15 @@
 
 
 
+
+
+
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-free/css/all.css'; 
 import { FacebookShareButton, TwitterShareButton, WhatsappShareButton } from 'react-share';
+import { Helmet } from 'react-helmet';
 
 function Home() {
   const [image, setImage] = useState(null);
@@ -282,28 +286,27 @@ function Home() {
         reader.onload = () => {
           const imageUrl = reader.result;
           setImage(imageUrl);
-          updateMetaTags(imageUrl);
+          console.log("url",imageUrl);
+          // Dynamically update meta tags
+          // const ogImageMeta = document.querySelector('meta[property="og:image"]');
+          // const twitterImageMeta = document.querySelector('meta[name="twitter:image"]');
+          
+          // if (ogImageMeta) {
+          //   ogImageMeta.setAttribute('content', imageUrl);
+          // }
+          
+          // if (twitterImageMeta) {
+          //   twitterImageMeta.setAttribute('content', imageUrl);
+          // }
         };
+      
         reader.readAsDataURL(blob);
       })
       .catch(error => {
         console.error('Error:', error);
       });
   }
-
-  const updateMetaTags = (imageUrl) => {
-    const ogImageMeta = document.querySelector('meta[property="og:image"]');
-    const twitterImageMeta = document.querySelector('meta[name="twitter:image"]');
-
-    if (ogImageMeta) {
-      ogImageMeta.setAttribute('content', imageUrl);
-    }
-
-    if (twitterImageMeta) {
-      twitterImageMeta.setAttribute('content', imageUrl);
-    }
-  }
-
+console.log("imageee",image);
   const handleSubmit = (e) => {
     e.preventDefault();
     const category = document.getElementById("input").value; 
@@ -314,6 +317,32 @@ function Home() {
 
   return (
     <div>
+       <Helmet>
+        {/* Common meta tags */}
+        <title>Random Image Generator</title>
+        <meta name="description" content={description} />
+
+        {/* Open Graph Meta Tags for Facebook and LinkedIn */}
+        <meta property="og:title" content="Random Image Generator" />
+        <meta property="og:description" content="Generate and share random images with this cool tool!" />
+        <meta property="og:image" content={image} />
+        <meta property="og:url" content={urlIs} />
+
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Random Image Generator" />
+        <meta name="twitter:description" content="Generate and share random images with this cool tool!" />
+        <meta name="twitter:image" content={image} />
+        <meta name="twitter:url" content={urlIs} />
+
+
+        <meta property="og:site_name" content="Your Site Name" />
+        <meta property="og:title" content="Random Image Generator" />
+        <meta property="og:description" content="Generate and share random images with this cool tool!" />
+        <meta property="og:image" content={image} /> 
+        <meta property="og:url" content={urlIs} />
+      </Helmet>
+
       <h3>Random Image Generator</h3>
       {image ? (
         <img
