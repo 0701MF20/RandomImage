@@ -320,7 +320,7 @@ console.log("imageee",image);
        <Helmet>
         {/* Common meta tags */}
         <title>Random Image Generator</title>
-        <meta name="description" content={description} />
+        
 
         {/* Open Graph Meta Tags for Facebook and LinkedIn */}
         <meta property="og:title" content="Random Image Generator" />
