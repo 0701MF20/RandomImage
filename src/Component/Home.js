@@ -313,7 +313,7 @@ console.log("imageee",image);
     fetchRandomImage(category);
   }
 
-  let urlIs = "https://enchanting-crisp-36d51a.netlify.app/";
+  let urlIs = "https://genuine-arithmetic-39abd4.netlify.app";
 
   return (
     <div>
